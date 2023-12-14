@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Moviecontroller;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +20,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostsController::class, 'home']);
 
 //register form
-Route::get('/user/register',[UserController::class,'register']);
+Route::get('/user/register',[UserController::class,'create']);
+
+Route::post('/user/register',[UserController::class,'store']);
 
 //login form
-Route::get('user/login',[UserController::class,'login']);
+Route::get('/user/login',[UserController::class,'login']);
+
+Route::post('/user/authenticate',[UserController::class,'authenticate']);
+
+//logout form
+Route::post('/user/logout',[UserController::class,'logout']);
+
+//movie_list
+Route::get('/movie_list',[Moviecontroller::class,'movie_list']);
+
+//movie_detail
+Route::get('/movie_detail',[Moviecontroller::class,'movie_detail']);
+
+//admin

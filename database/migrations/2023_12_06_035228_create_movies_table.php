@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('image');
             $table->text('decription');
+            $table->text('trailer_image');
             $table->string('language');
             $table->string('genre');
             $table->string('photos');
-            $table->string('cast');
+            $table->string('rating');
             $table->timestamps();
         });
     }
