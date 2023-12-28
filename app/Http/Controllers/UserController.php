@@ -40,7 +40,7 @@ class UserController extends Controller
         //login
         auth()->login($user);
 
-        return redirect('/')->with('message', 'Register Successfully');
+        return redirect('/');
     }
     //login form
     public function login()

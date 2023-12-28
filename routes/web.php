@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Moviecontroller;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
@@ -20,22 +21,37 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostsController::class, 'home']);
 
 //register form
-Route::get('/user/register',[UserController::class,'create']);
+Route::get('/user/register', [UserController::class, 'create']);
 
-Route::post('/user/register',[UserController::class,'store']);
+Route::post('/user/register', [UserController::class, 'store']);
 
 //login form
-Route::get('/user/login',[UserController::class,'login']);
+Route::get('/user/login', [UserController::class, 'login']);
 
-Route::post('/user/authenticate',[UserController::class,'authenticate']);
+Route::post('/user/authenticate', [UserController::class, 'authenticate']);
 
 //logout form
-Route::post('/user/logout',[UserController::class,'logout']);
+Route::post('/user/logout', [UserController::class, 'logout']);
 
-//movie_list
-Route::get('/movie_list',[Moviecontroller::class,'movie_list']);
+//detail
+Route::get('/movie_detail', [MovieController::class, 'detail']);
 
-//movie_detail
-Route::get('/movie_detail',[Moviecontroller::class,'movie_detail']);
+//list
+Route::get('/movie_list', [MovieController::class, 'list']);
 
 //admin
+Route::prefix('admin')->middleware(['admin'])->group(function () {
+    Route::get('/home', [AdminController::class, 'home']);
+
+    Route::get('/movie/create', [MovieController::class, 'create']);
+
+    Route::post('/movie/create', [MovieController::class, 'store']);
+
+    Route::get('/movie/showMovie', [MovieController::class, 'showMovie']);
+
+    Route::get('/movie/{id}/edit', [MovieController::class, 'edit']);
+
+    Route::put('/movie/{id}/edit', [MovieController::class, 'update']);
+
+    Route::delete('/movie/{id}/destroy', [MovieController::class, 'destroy']);
+});

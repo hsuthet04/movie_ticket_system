@@ -17,6 +17,10 @@ class Movie extends Model
         'language',
         'genre',
         'photos',
-        'rating'
+        'rating',
+        'duration',
+        'release_date',
+        'created_at',
+        'updated_at'
     ];
 }
