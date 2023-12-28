@@ -19,7 +19,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button movie" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="margin-left: 5px;">
                                     Movie Management
                                 </button>
                             </h2>
@@ -28,7 +28,7 @@
                                 <div class="accordion-body wrapper">
                                     <a href="/admin/movie/create">Create Movies</a>
                                     <a href="/admin/movie/showMovie">All Movies</a>
-                                    <a href="">Update Movies</a>
+                                    
                                 </div>
                             </div>
                         </div>

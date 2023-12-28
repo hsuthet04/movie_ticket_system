@@ -43,6 +43,9 @@
                             <a href="">{{ auth()->user()->name }}</a>
                         </li>
                         <li>
+                            <a href="/admin/home">Admin</a>
+                        </li>
+                        <li>
                             <a href="">
                                 <form method="POST" action="/user/logout">
                                     @csrf

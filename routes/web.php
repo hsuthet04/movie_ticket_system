@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Moviecontroller;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,9 @@ Route::get('/movie_detail', [MovieController::class, 'detail']);
 
 //list
 Route::get('/movie_list', [MovieController::class, 'list']);
+
+//seat_plan
+Route::get('/booking/seat_plan',[BookingController::class,'index']);
 
 //admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
