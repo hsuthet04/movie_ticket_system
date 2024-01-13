@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
+use App\Models\Theatre;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function seat_plan(string $id)
     {
-        return view('booking.seat_plan');
+        $movie = Movie::findOrFail($id);
+        return view('booking.seat_plan', compact('movie'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function checkout(string $id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        return view('booking.movie_checkout', compact('movie'));
     }
 
+    public function ticket_plan(string $id)
+    {
+        $movie = Movie::findOrFail($id);
+        $theatres = Theatre::select('id', 'name')->get();
+        return view('booking.ticket_plan', compact('movie', 'theatres'));
+    }
     /**
      * Store a newly created resource in storage.
      */

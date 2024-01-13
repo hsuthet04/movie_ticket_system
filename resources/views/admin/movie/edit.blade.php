@@ -23,8 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="image">Image<span>*</span></label>
-                                <input type="file" placeholder="" id="image" name="image"
-                                    value="{{ $movie->image }}">
+                                <input type="file" id="image" name="image">
                             </div>
                             <div class="form-group">
                                 <label for="description">Description<span>*</span></label>
@@ -33,8 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="trailer_image">Trailer_image<span>*</span></label>
-                                <input type="file" placeholder="" id="trailer_image" name="trailer_image"
-                                    value="{{ $movie->trailer_image }}">
+                                <input type="file" id="trailer_image" name="trailer_image">
                             </div>
                             <select class="form-select" aria-label="Default select example"
                                 style="background-color: #9aace5; color:white; font-weight:700; text-align:center"
@@ -59,8 +57,7 @@
                             </select>
                             <div class="form-group">
                                 <label for="photos">Photos<span>*</span></label>
-                                <input type="file" placeholder="" id="photos" name="photos"
-                                    value="{{ $movie->photos }}">
+                                <input type="file" id="photos" name="photos">
                             </div>
                             <div class="form-group">
                                 <label for="rating">Rating<span>*</span></label>

@@ -64,15 +64,6 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="react-item mr-3">
-                                    <a href="/booking/seat_plan">
-                                        <div class="thumb">
-                                            <img src="{{ asset('assets/images/icons/book.png') }}" alt="icons">
-                                        </div>
-                                        <span>book ticket</span>
-                                    </a>
-                                </div>
-
                             </div>
                         </div>
                     </div>

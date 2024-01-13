@@ -35,13 +35,19 @@ Route::post('/user/authenticate', [UserController::class, 'authenticate']);
 Route::post('/user/logout', [UserController::class, 'logout']);
 
 //detail
-Route::get('/movie_detail', [MovieController::class, 'detail']);
+Route::get('/movie/movie_detail', [MovieController::class, 'detail']);
 
 //list
-Route::get('/movie_list', [MovieController::class, 'list']);
+Route::get('/movie/movie_list', [MovieController::class, 'list']);
 
 //seat_plan
-Route::get('/booking/seat_plan',[BookingController::class,'index']);
+Route::get('/booking/{id}/{theatre_id}/seat_plan', [BookingController::class, 'seat_plan']);
+
+//movie checkout
+Route::get('/booking/{id}/movie_checkout', [BookingController::class, 'checkout']);
+
+//ticket_plan
+Route::get('/booking/{movie_id}/ticket_plan', [BookingController::class, 'ticket_plan']);
 
 //admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {

@@ -25,9 +25,6 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->file('image')->store();
-        // $request->file('trailer_image')->store();
-        // $request->file('photos')->store();
         $request->validate([
             'name' => 'required',
             'image' => 'required',
@@ -41,27 +38,26 @@ class MovieController extends Controller
             'release_date' => 'required'
         ]);
 
-
         if ($request->hasFile('image')) {
-            $image = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads'), $image);
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads'), $imageName);
         }
         if ($request->hasFile('trailer_image')) {
-            $trailer_image = time() . '.' . $request->trailer_image->extension();
-            $request->trailer_image->move(public_path('uploads'), $trailer_image);
+            $trailer_imageName = time() . '.' . $request->trailer_image->extension();
+            $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
         }
         if ($request->hasFile('photos')) {
-            $photos = time() . '.' . $request->photos->extension();
-            $request->photos->move(public_path('photos') . $photos);
+            $photosName = time() . '.' . $request->photos->extension();
+            $request->photos->move(public_path('uploads') . $photosName);
         }
         Movie::create([
             'name' => $request->input('name'),
-            'image' => $image,
+            'image' => $imageName,
             'description' => $request->input('description'),
-            'trailer_image' => $trailer_image,
+            'trailer_image' => $trailer_imageName,
             'language' => $request->input('language'),
             'genre' => $request->input('genre'),
-            'photos' => $photos,
+            'photos' => $photosName,
             'rating' => $request->input('rating'),
             'duration' => $request->input('duration'),
             'release_date' => $request->input('release_date'),
@@ -90,30 +86,43 @@ class MovieController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'language' => 'required',
-            'genre' => 'required',
-            'rating' => ['required', 'numeric'],
-            'duration' => ['required', 'numeric'],
-            'release_date' => 'required'
-        ]);
+        // $data = $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'language' => 'required',
+        //     'genre' => 'required',
+        //     'rating' => ['required', 'numeric'],
+        //     'duration' => ['required', 'numeric'],
+        //     'release_date' => 'required'
+        // ]);
+
         $movie = Movie::findOrFail($id);
         if ($request->hasFile('image')) {
-            $image = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads'), $image);
-            $movie->image = $image;
+            $image = $request->file('image');
+            $originalName = $image->getClientOriginalName();
+            $parts = explode('.', $originalName);
+            $extension = end($parts);
+            $imageName = time() . '.' . $extension;
+            $request->image->move(public_path('uploads'), $imageName);
+            $movie->image = $imageName;
         }
         if ($request->hasFile('trailer_image')) {
-            $trailer_image = time() . '.' . $request->trailer_image->extension();
-            $request->trailer_image->move(public_path('uploads'), $trailer_image);
-            $movie->trailer_image = $trailer_image;
+            $trailer_image = $request->file('trailer_image');
+            $originalName = $trailer_image->getClientOriginalName();
+            $parts = explode('.', $originalName);
+            $extension = end($parts);
+            $trailer_imageName = time() . '.' . $extension;
+            $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
+            $movie->trailer_image = $trailer_imageName;
         }
         if ($request->hasFile('photos')) {
-            $photos = time() . '.' . $request->photos->extension();
-            $request->photos->move(public_path('uploads') . $photos);
-            $movie->photos = $photos;
+            $photos = $request->file('photos');
+            $originalName = $photos->getClientOriginalName();
+            $parts = explode('.', $originalName);
+            $extension = end($parts);
+            $photosName = time() . '.' . $extension;
+            $request->photos->move(public_path('uploads') . $photosName);
+            $movie->photos = $photosName;
         }
         $movie->update([
             'name' => $request->input('name'),
@@ -122,9 +131,10 @@ class MovieController extends Controller
             'genre' => $request->input('genre'),
             'rating' => $request->input('rating'),
             'duration' => $request->input('duration'),
-            'release_date' => $request->input('release_date'),
+            'release_date' => $request->input('release_date')
         ]);
         return redirect('/admin/movie/showMovie');
+        // return dd($movie);
     }
 
     /**
@@ -132,17 +142,18 @@ class MovieController extends Controller
      */
     public function destroy(string $id)
     {
-        $movie=Movie::findOrFail($id);
+        $movie = Movie::findOrFail($id);
         $movie->delete();
         return redirect('/admin/movie/showMovie');
     }
 
     public function detail()
     {
-        return view('movie_detail');
+        return view('movie.movie_detail');
     }
     public function list()
     {
-        return view('movie_list');
+        $movies = Movie::all();
+        return view('movie.movie_list', compact('movies'));
     }
 }
