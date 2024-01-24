@@ -20,4 +20,8 @@ class Showtime extends Model
     {
         return $this->hasMany(Seat::class);
     }
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class);
+    }
 }

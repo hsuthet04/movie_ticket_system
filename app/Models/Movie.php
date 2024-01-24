@@ -16,11 +16,27 @@ class Movie extends Model
         'trailer_image',
         'language',
         'genre',
-        'photos',
         'rating',
         'duration',
         'release_date',
         'created_at',
         'updated_at'
     ];
+
+    public function theatres()
+    {
+        return $this->belongsToMany(Theatre::class, 'movie_theatre');
+    }
+    public function showTimes()
+    {
+        return $this->hasMany(Showtime::class);
+    }
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
 }

@@ -4,8 +4,7 @@
          <div class="header-wrapper">
              <div class="logo">
                  <a href="/">
-                     <img src="{{ asset('assets/images/logo/logo.jpg') }}" alt="logo"
-                         style="width: 50px; height :50px;">
+                     <img src="{{ asset('assets/images/kitten.jpg') }}" alt="logo" style="width: 50px; height :50px;">
                      <span class="webname">Teddy Cine</span>
                  </a>
              </div>
@@ -15,9 +14,6 @@
                      <ul class="submenu">
                          <li>
                              <a href="/movie/movie_list">Movie List</a>
-                         </li>
-                         <li>
-                             <a href="/movie/movie_detail">Movie Details</a>
                          </li>
                          <li>
                              <a href="movie-ticket-plan.html">Movie Ticket Plan</a>
@@ -39,12 +35,12 @@
                      <a href="contact.html">contact</a>
                  </li>
                  @auth
-                 @if (auth()->user()->role == 1)
-                     <li>
-                         <a href="/admin/home">Admin</a>
-                     </li>
-                 @endif
-                 
+                     @if (auth()->user()->role == 1)
+                         <li>
+                             <a href="/admin/home">Admin</a>
+                         </li>
+                     @endif
+
                      <li>
                          {{ auth()->user()->name }}
                      </li>

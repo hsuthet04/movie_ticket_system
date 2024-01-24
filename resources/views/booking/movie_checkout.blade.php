@@ -57,21 +57,22 @@
                             <h5 class="title">Already a Boleto Member?</h5>
                             <p>Sign in to earn points and make booking easier!</p>
                         </div>
-                        <a href="#0" class="sign-in-area">
+                        <a href="/user/register" class="sign-in-area">
                             <i class="fas fa-user"></i><span>Sign in</span>
                         </a>
                     </div>
                     <div class="checkout-widget checkout-contact">
                         <h5 class="title">Share your Contact Details </h5>
-                        <form class="checkout-contact-form">
+                        <form class="checkout-contact-form" method="POST" action="">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" placeholder="Full Name">
+                                <input type="text" name="name" placeholder="Full Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Mail">
+                                <input type="text" name="email" placeholder="Enter your Mail">
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Phone Number ">
+                                <input type="text" name="phone" placeholder="Enter your Phone Number ">
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Continue" class="custom-button">
@@ -94,19 +95,19 @@
                         <ul class="payment-option">
                             <li class="active">
                                 <a href="#0">
-                                    <img src="assets/images/payment/card.png" alt="payment">
+                                    <img src="{{ asset('assets/images/payment/card.png') }}" alt="payment">
                                     <span>Credit Card</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#0">
-                                    <img src="assets/images/payment/card.png" alt="payment">
+                                    <img src="{{ asset('assets/images/payment/card.png') }}" alt="payment">
                                     <span>Debit Card</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#0">
-                                    <img src="assets/images/payment/paypal.png" alt="payment">
+                                    <img src="{{ asset('assets/images/payment/paypal.png') }}" alt="payment">
                                     <span>paypal</span>
                                 </a>
                             </li>
@@ -154,26 +155,18 @@
                         <h4 class="title">booking summery</h4>
                         <ul>
                             <li>
-                                <h6 class="subtitle">Venus</h6>
-                                <span class="info">English-2d</span>
+                                <h6 class="subtitle">{{ $movie->name }}</h6>
+                                <span class="info">{{ $movie->language }}</span>
                             </li>
                             <li>
-                                <h6 class="subtitle"><span>City Walk</span><span>02</span></h6>
-                                <div class="info"><span>10 SEP TUE, 11:00 PM</span> <span>Tickets</span></div>
+                                <h6 class="subtitle"><span>{{ $theatre->name }}</span><span>02</span></h6>
+                                <div class="info"><span>{{ $showtime->time }}</span> <span>Tickets</span></div>
                             </li>
                             <li>
                                 <h6 class="subtitle mb-0"><span>Tickets Price</span><span>$150</span></h6>
                             </li>
                         </ul>
-                        <ul class="side-shape">
-                            <li>
-                                <h6 class="subtitle"><span>combos</span><span>$57</span></h6>
-                                <span class="info"><span>2 Nachos Combo</span></span>
-                            </li>
-                            <li>
-                                <h6 class="subtitle"><span>food & bevarage</span></h6>
-                            </li>
-                        </ul>
+
                         <ul>
                             <li>
                                 <span class="info"><span>price</span><span>$207</span></span>

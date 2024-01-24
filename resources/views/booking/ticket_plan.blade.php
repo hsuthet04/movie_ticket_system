@@ -20,7 +20,7 @@
     </section>
     <!-- ==========Banner-Section========== -->
 
-    <!-- ==========Book-Section========== -->
+    {{-- <!-- ==========Book-Section========== -->
     <section class="book-section bg-one">
         <div class="container">
             <form class="ticket-search-form two">
@@ -28,7 +28,7 @@
             </form>
         </div>
     </section>
-    <!-- ==========Book-Section========== -->
+    <!-- ==========Book-Section========== --> --}}
 
     <!-- ==========Movie-Section========== -->
     <div class="ticket-plan-section padding-bottom padding-top">
@@ -43,49 +43,22 @@
                                         <i class="far fa-heart"></i>
                                         <i class="fas fa-heart"></i>
                                     </div>
-                                    <a href="#0" class="name">{{ $theatre->name }}</a>
+                                    <a href="#" class="name">{{ $theatre->name }}</a>
                                     <div class="location-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                 </div>
                                 <div class="movie-schedule">
-                                    <div class="item">
-                                        09:40
-                                    </div>
-                                    <div class="item">
-                                        13:45
-                                    </div>
-                                    <div class="item">
-                                        15:45
-                                    </div>
+                                    @foreach ($showtimes as $showtime)
+                                        <a class="item"
+                                            href="/booking/{{ $movie->id }}/{{ $theatre->id }}/{{ $showtime->id }}/seat_plan">
+                                            {{ $showtime->time }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </li>
                         @endforeach
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            Launch demo modal
-                        </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <section class="window-warning">
-                                    
-                                    <div class="warning-item">
-                                        <h6 class="subtitle">Welcome! </h6>
-                                        <h4 class="title">Select Your Seats</h4>
-                                        <div class="thumb">
-                                            <img src="{{ asset('assets/images/movie/seat-plan.png') }}" alt="movie">
-                                        </div>
-                                        <a href="/booking/{{ $movie->id }}/{{ $theatre->id }}/seat_plan"
-                                            class="custom-button seatPlanButton">Seat Plans<i
-                                                class="fas fa-angle-right"></i></a>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
                     </ul>
                 </div>
             </div>

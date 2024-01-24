@@ -7,12 +7,13 @@
         @include('admin.aside')
     </div>
     <div>
-        <section class="account-section bg_img" data-background="assets/images/account/account-bg.jpg">
+        <section class="account-section bg_img" data-background="{{ asset('assets/images/account/account-bg.jpg') }}">
             <div class="container">
 
                 <div class="padding-top padding-bottom">
-                    <h3 style="text-align: center;">create</h3>
-                    <div class="account-area">
+
+                    <div class="account-area" style="margin-right: 180px;">
+                        <h3 style="text-align: center; margin-bottom:25px;">create Movies</h3>
                         <form method="POST" action="/admin/movie/create" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -56,11 +57,6 @@
                                 <option value="adventure">Adventure</option>
                                 <option value="action">Action</option>
                             </select>
-                            <div class="form-group">
-                                <label for="photos">Photos<span>*</span></label>
-                                <input type="file" placeholder="" id="photos" name="photos"
-                                    value="{{ old('photos') }}">
-                            </div>
                             <div class="form-group">
                                 <label for="rating">Rating<span>*</span></label>
                                 <input type="text" placeholder="Enter Rating" id="rating" name="rating"

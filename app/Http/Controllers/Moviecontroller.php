@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Genre;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -32,7 +34,6 @@ class MovieController extends Controller
             'trailer_image' => 'required',
             'language' => 'required',
             'genre' => 'required',
-            'photos' => 'required',
             'rating' => ['required', 'numeric'],
             'duration' => ['required', 'numeric'],
             'release_date' => 'required'
@@ -46,10 +47,6 @@ class MovieController extends Controller
             $trailer_imageName = time() . '.' . $request->trailer_image->extension();
             $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
         }
-        if ($request->hasFile('photos')) {
-            $photosName = time() . '.' . $request->photos->extension();
-            $request->photos->move(public_path('uploads') . $photosName);
-        }
         Movie::create([
             'name' => $request->input('name'),
             'image' => $imageName,
@@ -57,7 +54,6 @@ class MovieController extends Controller
             'trailer_image' => $trailer_imageName,
             'language' => $request->input('language'),
             'genre' => $request->input('genre'),
-            'photos' => $photosName,
             'rating' => $request->input('rating'),
             'duration' => $request->input('duration'),
             'release_date' => $request->input('release_date'),
@@ -115,15 +111,6 @@ class MovieController extends Controller
             $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
             $movie->trailer_image = $trailer_imageName;
         }
-        if ($request->hasFile('photos')) {
-            $photos = $request->file('photos');
-            $originalName = $photos->getClientOriginalName();
-            $parts = explode('.', $originalName);
-            $extension = end($parts);
-            $photosName = time() . '.' . $extension;
-            $request->photos->move(public_path('uploads') . $photosName);
-            $movie->photos = $photosName;
-        }
         $movie->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -147,13 +134,28 @@ class MovieController extends Controller
         return redirect('/admin/movie/showMovie');
     }
 
-    public function detail()
+    public function detail(string $id)
     {
-        return view('movie.movie_detail');
+        $movies = Movie::findOrFail($id);
+        return view('movie.movie_detail', compact('movies'));
     }
     public function list()
     {
         $movies = Movie::all();
         return view('movie.movie_list', compact('movies'));
+    }
+    public function filter(Request $request)
+    {
+        $genreId = $request->input('genre_id');
+        $languageId = $request->input('language_id');
+
+        $movies = Movie::when($genreId, function ($query) use ($genreId) {
+            $query->where('genre_id', $genreId);
+        })
+            ->when($languageId, function ($query) use ($languageId) {
+                $query->where('language_id', $languageId);
+            })
+            ->get();
+        
     }
 }

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- admin css start --}}
-    <link rel="shortcut icon" href="{{ asset('assets/images/shortcut.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/kitten.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('../assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">

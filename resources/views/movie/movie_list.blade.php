@@ -78,6 +78,7 @@
                             </div>
                         </div>
                     </div>
+                    <button class="filter_button"><a href="">Search</a></button>
                 </div>
                 <div class="col-lg-9 mb-50 mb-lg-0">
                     <div class="filter-tab tab">
@@ -162,11 +163,12 @@
                                                 <div class="book-area">
                                                     <div class="book-ticket">
                                                         <div class="react-item">
-                                                            <a href="#0">
+                                                            <a href="/movie/{{ $movie->id }}/movie_detail">
                                                                 <div class="thumb">
                                                                     <img src="{{ asset('assets/images/icons/heart.png') }}"
                                                                         alt="icons">
                                                                 </div>
+                                                                <span>Details</span>
                                                             </a>
                                                         </div>
                                                         <div class="react-item mr-auto">

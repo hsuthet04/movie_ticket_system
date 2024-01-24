@@ -30,24 +30,26 @@
     text-align: center;
     padding: 10px;
 }
+.content-wrapper {
+    background-color: #001232;
+}
 .movie_list {
     margin-top: 100px;
     margin-left: 300px;
 }
-.edit_button{
+.edit_button {
     background: none;
     padding: 10px;
 }
-.delete_button{
+.delete_button {
     background: none;
     padding: 10px;
 }
 .custom-checkbox input {
     display: none;
 }
-.single-seat{
+.single-seat {
     margin-bottom: 10px;
-    
 }
 /* Style for the custom checkbox */
 .custom-checkbox {
@@ -57,7 +59,6 @@
     font-size: 16px;
     user-select: none;
     margin-left: 10px;
-    
 }
 
 .checkmark {
@@ -65,11 +66,10 @@
     top: 0;
     left: 0;
     height: 40px;
-    width: 40px;
+    width: 45px;
     background: none;
     border: 2px solid #314c81;
     text-align: center;
-    
 }
 
 .custom-checkbox input:checked + .checkmark {
@@ -77,11 +77,30 @@
 }
 
 .custom-checkbox input:checked + .checkmark:after {
-    
     font-size: 14px;
     color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.table {
+    color: white;
+    margin-top: 100px;
+
+    border: 1px white solid;
+}
+.table tr th {
+    border: none;
+    padding: 20px;
+}
+.table th {
+    border: none;
+}
+.table td {
+    border: none;
+}
+.filter_button {
+    background: none;
+    border: 1px white solid;
 }

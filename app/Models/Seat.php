@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'price',
+        'theatre_id',
+        'showtime_id',
+        'movie_id',
+        'created_at',
+        'updated_at'
+
+    ];
 
     public function showtime()
     {

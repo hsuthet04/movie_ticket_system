@@ -5,6 +5,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\SeatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,19 +36,21 @@ Route::post('/user/authenticate', [UserController::class, 'authenticate']);
 Route::post('/user/logout', [UserController::class, 'logout']);
 
 //detail
-Route::get('/movie/movie_detail', [MovieController::class, 'detail']);
+Route::get('/movie/{id}/movie_detail', [MovieController::class, 'detail']);
 
 //list
 Route::get('/movie/movie_list', [MovieController::class, 'list']);
 
 //seat_plan
-Route::get('/booking/{id}/{theatre_id}/seat_plan', [BookingController::class, 'seat_plan']);
+Route::get('/booking/{id}/{theatre_id}/{showtime_id}/seat_plan', [BookingController::class, 'seat_plan']);
 
 //movie checkout
-Route::get('/booking/{id}/movie_checkout', [BookingController::class, 'checkout']);
+Route::get('/booking/{id}/{theatre_id}/{showtime_id}/movie_checkout', [BookingController::class, 'checkout']);
 
 //ticket_plan
 Route::get('/booking/{movie_id}/ticket_plan', [BookingController::class, 'ticket_plan']);
+
+// Route::get('/movie/movie_list', [MovieController::class, 'filter']);
 
 //admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
@@ -64,4 +67,10 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::put('/movie/{id}/edit', [MovieController::class, 'update']);
 
     Route::delete('/movie/{id}/destroy', [MovieController::class, 'destroy']);
+
+    Route::get('/scheduling/theatre_list', [AdminController::class, 'theatre_list']);
+
+    Route::get('/user/user_list', [AdminController::class, 'user_list']);
+
+    Route::resource('seat', SeatController::class);
 });

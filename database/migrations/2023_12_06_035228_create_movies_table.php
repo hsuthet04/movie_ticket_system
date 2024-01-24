@@ -19,10 +19,18 @@ return new class extends Migration
             $table->text('trailer_image')->nullable();
             $table->string('language');
             $table->string('genre');
-            $table->string('photos')->nullable();
             $table->string('rating');
             $table->integer('duration');
             $table->date('release_date');
+
+            // Foreign key for genre
+            $table->unsignedBigInteger('genre_id');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+
+            // Foreign key for language
+            $table->unsignedBigInteger('language_id');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -56,10 +56,6 @@
                                 <option value="action">Action</option>
                             </select>
                             <div class="form-group">
-                                <label for="photos">Photos<span>*</span></label>
-                                <input type="file" id="photos" name="photos">
-                            </div>
-                            <div class="form-group">
                                 <label for="rating">Rating<span>*</span></label>
                                 <input type="text" placeholder="Enter Rating" id="rating" name="rating"
                                     value="{{ $movie->rating }}">

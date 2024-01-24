@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seat;
+use App\Models\User;
+use App\Models\Movie;
+use App\Models\Theatre;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,31 +15,21 @@ class AdminController extends Controller
      */
     public function home()
     {
-        return view('admin.home');
+        $users = User::all();
+        $movies = Movie::all();
+        $theatres = Theatre::all();
+        return view('admin.home', compact('users', 'movies', 'theatres'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function theatre_list()
     {
-        
+        return view('admin.scheduling.theatre_list');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function user_list()
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $users = User::select('id', 'name', 'email', 'phone')->get();
+        return view('admin.user.user_list', compact('users'));
     }
 
     /**

@@ -22,7 +22,7 @@
                                         <div class="card-inner">
                                             <h5 class="card-title text-black">Users</h5>
                                             <br>
-                                            <p class="tx-12 text-muted">48% target reached</p>
+                                            <p class="tx-12 text-muted">{{ $users->count() }} target reached</p>
                                             <div class="card-icon-wrapper">
 
                                             </div>
@@ -35,7 +35,7 @@
                                         <div class="card-inner">
                                             <h5 class="card-title text-black">Movies</h5>
                                             <br>
-                                            <p class="tx-12 text-muted">55% target reached</p>
+                                            <p class="tx-12 text-muted">{{ $movies->count() }} target reached</p>
                                             <div class="card-icon-wrapper">
 
                                             </div>
@@ -46,9 +46,9 @@
                                     class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet">
                                     <div class="mdc-card info-card info-card--primary">
                                         <div class="card-inner">
-                                            <h5 class="card-title text-black">Ticket Management</h5>
+                                            <h5 class="card-title text-black">Theatres</h5>
                                             <br>
-                                            <p class="tx-12 text-muted">87% target reached</p>
+                                            <p class="tx-12 text-muted">{{$theatres->count()}} target reached</p>
                                             <div class="card-icon-wrapper">
 
                                             </div>
@@ -206,25 +206,7 @@
                             </div>
                         </div>
                     </main>
-                    <!-- partial:partials/_footer.html -->
-                    <footer>
-                        <div class="mdc-layout-grid">
-                            <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
-                                    <span class="tx-14">Copyright © 2019 . All rights reserved.</span>
-                                </div>
-                                <div
-                                    class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop d-flex justify-content-end">
-                                    <div class="d-flex align-items-center">
-                                        <a href="">Documentation</a>
-                                        <span class="vertical-divider"></span>
-                                        <a href="">FAQ</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- partial -->
+
                 </div>
             </div>
         </div>
