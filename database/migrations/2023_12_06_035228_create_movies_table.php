@@ -31,6 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

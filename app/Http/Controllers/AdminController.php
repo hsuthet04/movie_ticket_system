@@ -6,6 +6,8 @@ use App\Models\Seat;
 use App\Models\User;
 use App\Models\Movie;
 use App\Models\Theatre;
+use App\Models\Booking;
+use App\Models\Showtime;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,7 +20,8 @@ class AdminController extends Controller
         $users = User::all();
         $movies = Movie::all();
         $theatres = Theatre::all();
-        return view('admin.home', compact('users', 'movies', 'theatres'));
+        $bookings = Booking::all();
+        return view('admin.home', compact('users', 'movies', 'theatres', 'bookings'));
     }
 
     public function theatre_list()
@@ -32,6 +35,11 @@ class AdminController extends Controller
         return view('admin.user.user_list', compact('users'));
     }
 
+    public function booking()
+    {
+        $bookings = Booking::with('user', 'movie', 'theatre', 'showtime')->get();
+        return view('admin.booking.booking_list', compact('bookings'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

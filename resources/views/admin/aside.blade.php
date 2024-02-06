@@ -29,7 +29,7 @@
                                 <div class="accordion-body wrapper">
                                     <a href="/admin/movie/create">Create Movies</a>
                                     <a href="/admin/movie/showMovie">All Movies</a>
-
+                                    <a href="/admin/movie/trashmovie">Trash</a>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                     </a>
                 </div>
                 <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="#" target="_blank">
+                    <a class="mdc-drawer-link" href="/admin/booking/booking_list">
                         Booking and Reservation
                     </a>
                 </div>

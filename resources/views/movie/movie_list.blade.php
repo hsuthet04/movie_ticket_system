@@ -21,64 +21,51 @@
         <div class="container">
             <div class="row flex-wrap-reverse justify-content-center">
                 <div class="col-sm-10 col-md-8 col-lg-3">
-                    <div class="widget-1 widget-check">
-                        <div class="widget-header">
-                            <h5 class="m-title">Filter By</h5> <a href="#0" class="clear-check">Clear All</a>
-                        </div>
-                        <div class="widget-1-body">
-                            <h6 class="subtitle">Language</h6>
-                            <div class="check-area">
-                                <div class="form-group">
-                                    <input type="checkbox" name="english" id="english"><label
-                                        for="english">English</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="japanese" id="japanese"><label
-                                        for="japanese">Japanese</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="korean" id="korean"><label
-                                        for="korean">Korean</label>
+                    <form action="{{ route('filter') }}" method="GET">
+                        <div class="widget-1 widget-check">
+                            <div class="widget-header">
+                                <h5 class="m-title">Filter By</h5> <a href="#0" class="clear-check">Clear All</a>
+                            </div>
+                            <div class="widget-1-body">
+                                <h6 class="subtitle">Language</h6>
+                                <div class="check-area">
+                                    <div class="form-group">
+                                        @foreach ($languages as $language)
+                                            <div class="d-flex w-100">
+                                                <input type="checkbox" name="language[]" value="{{ $language->name }}"
+                                                    id="{{ $language->name }}"
+                                                    {{ in_array($language, (array) request('language', [])) ? 'checked' : '' }}>
+                                                <label for="{{ $language->name }}">{{ $language->name }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="widget-1 widget-check">
-                        <div class="widget-1-body">
-                            <h6 class="subtitle">genre</h6>
-                            <div class="check-area">
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre1"><label
-                                        for="genre1">thriller</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre2"><label
-                                        for="genre2">horror</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre4"><label
-                                        for="genre4">romance</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre5"><label
-                                        for="genre5">action</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre6"><label
-                                        for="genre6">comedy</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre10"><label
-                                        for="genre10">fantasy</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="genre" id="genre10"><label
-                                        for="genre10">adventure</label>
+                        <div class="widget-1 widget-check">
+                            <div class="widget-1-body">
+                                <h6 class="subtitle">genre</h6>
+                                <div class="check-area">
+                                    <div class="form-group">
+                                        @foreach ($genres as $genre)
+                                            <div class="d-flex w-100">
+                                                <input type="checkbox" name="genre[]" value="{{ $genre->name }}"
+                                                    id="{{ $genre->name }}"
+                                                    {{ in_array($genre, (array) request('genre', [])) ? 'checked' : '' }}>
+                                                <label for="{{ $genre->name }}">{{ $genre->name }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button class="filter_button"><a href="">Search</a></button>
+                        <button class="filter_button"><a href="">Search</a></button>
+                        {{-- <ul>
+                            @foreach ($movies as $movie)
+                                <li>{{ $movie->language }} - {{ $movie->genre }}</li>
+                            @endforeach
+                        </ul> --}}
+                    </form>
                 </div>
                 <div class="col-lg-9 mb-50 mb-lg-0">
                     <div class="filter-tab tab">
@@ -107,14 +94,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <ul class="grid-button tab-menu">
-                                    <li>
-                                        <i class="fas fa-th"></i>
-                                    </li>
-                                    <li class="active">
-                                        <i class="fas fa-bars"></i>
-                                    </li>
-                                </ul>
+
                             </div>
                         </div>
                         <div class="tab-area">
@@ -137,9 +117,8 @@
                                                 </h5>
                                                 <p class="duration">2hrs 50 min</p>
                                                 <div class="movie-tags">
-                                                    <a href="#0">action</a>
-                                                    <a href="#0">adventure</a>
-                                                    <a href="#0">fantasy</a>
+                                                    <a href="#0">{{ $movie->genre }}</a>
+
                                                 </div>
                                                 <div class="release">
                                                     <span>Release Date : </span> <a href="#0"> November 8 , 2020</a>

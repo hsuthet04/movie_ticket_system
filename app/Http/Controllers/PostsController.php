@@ -12,4 +12,8 @@ class PostsController extends Controller
         $movies = Movie::all();
         return view('home', compact('movies'));
     }
+    public function contact()
+    {
+        return view('contact');
+    }
 }

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Movie extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'image',
@@ -38,5 +39,9 @@ class Movie extends Model
     public function language()
     {
         return $this->belongsTo(Language::class);
+    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

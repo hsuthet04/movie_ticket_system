@@ -36,11 +36,12 @@ class SeatController extends Controller
         $movie_id = $request->input('movie_id');
         $theatre_id = $request->input('theatre_id');
         $showTime_id = $request->input('showtime_id');
-
+        //dd($request->all());
         $rowCount = Seat::where('theatre_id', $theatre_id)
             ->where('movie_id', $movie_id)
             ->where('showtime_id', $showTime_id)
             ->count();
+        //dd($rowCount);
         if ($rowCount < 42) {
             for ($i = 1; $i < 43; $i++) {
                 Seat::create([
@@ -52,9 +53,7 @@ class SeatController extends Controller
             }
             $movie = Movie::findOrFail($movie_id);
             $theatre = Theatre::findOrFail($theatre_id);
-            $movie->theatres()->attach($theatre->id);
-
-            
+            // $movie->theatres()->attach($theatre->id);
 
             $message = "Seat Created Successfully";
         } else {

@@ -40,22 +40,22 @@
                                 style="background-color: #9aace5; color:white; font-weight:700; text-align:center"
                                 name="language">
                                 <option>Language</option>
-                                <option value="english">English</option>
-                                <option value="japanese">Japanese</option>
-                                <option value="korean">Korean</option>
+                                <option value="English">English</option>
+                                <option value="Japanese">Japanese</option>
+                                <option value="Korean">Korean</option>
                             </select>
 
                             <select class="form-select" aria-label="Default select example"
                                 style="background-color: #9aace5; color:white; font-weight:700; text-align:center; margin-top:25px;"
                                 name="genre">
                                 <option>Genre</option>
-                                <option value="horror">Horror</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="thriller">Thriller</option>
-                                <option value="fantasy">Fantasy</option>
-                                <option value="romance">Romance</option>
-                                <option value="adventure">Adventure</option>
-                                <option value="action">Action</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Action">Action</option>
                             </select>
                             <div class="form-group">
                                 <label for="rating">Rating<span>*</span></label>
@@ -72,6 +72,28 @@
                                 <input type="date" placeholder="Enter Release_date" id="release_date" name="release_date"
                                     value="{{ old('release_date') }}">
                             </div>
+                            {{-- <select class="form-select" aria-label="Default select example"
+                                style="background-color: #9aace5; color:white; font-weight:700; text-align:center"
+                                name="theatre_id">
+                                <option selected disabled>Theatres</option>
+                                @foreach ($theatres as $theatre)
+                                    <option value="{{ $theatre->id }}">{{ $theatre->name }}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select" aria-label="Default select example"
+                                style="background-color: #9aace5; color:white; font-weight:700; text-align:center"
+                                name="showtime_id">
+                                <option selected disabled>Showtimes</option>
+                                @foreach ($showTimes as $showTime)
+                                    <option value="{{ $showTime->id }}">{{ $showTime->time }}</option>
+                                @endforeach
+                            </select> --}}
+
+                            <div class="form-group text-center">
+                                <input type="submit" value="Create">
+                            </div>
+
+
                             <div class="form-group text-center">
                                 <input type="submit" value="Create">
                             </div>

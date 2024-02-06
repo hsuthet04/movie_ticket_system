@@ -47,13 +47,13 @@
                                 style="background-color: #9aace5; color:white; font-weight:700; text-align:center; margin-top:25px;"
                                 name="genre">
                                 <option>{{ $movie->genre }}</option>
-                                <option value="horror">Horror</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="thriller">Thriller</option>
-                                <option value="fantasy">Fantasy</option>
-                                <option value="romance">Romance</option>
-                                <option value="adventure">Adventure</option>
-                                <option value="action">Action</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Action">Action</option>
                             </select>
                             <div class="form-group">
                                 <label for="rating">Rating<span>*</span></label>

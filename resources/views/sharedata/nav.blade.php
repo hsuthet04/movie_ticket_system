@@ -10,15 +10,7 @@
              </div>
              <ul class="menu">
                  <li>
-                     <a href="#">movies</a>
-                     <ul class="submenu">
-                         <li>
-                             <a href="/movie/movie_list">Movie List</a>
-                         </li>
-                         <li>
-                             <a href="movie-ticket-plan.html">Movie Ticket Plan</a>
-                         </li>
-                     </ul>
+                     <a href="/movie/movie_list">Movies</a>
                  </li>
                  <li>
                      <a href="#0">news</a>
@@ -32,7 +24,10 @@
                      </ul>
                  </li>
                  <li>
-                     <a href="contact.html">contact</a>
+                     <a href="">Blog</a>
+                 </li>
+                 <li>
+                     <a href="{{ route('contact') }}">contact</a>
                  </li>
                  @auth
                      @if (auth()->user()->role == 1)

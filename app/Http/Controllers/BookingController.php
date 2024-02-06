@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seat;
 use App\Models\Movie;
+use App\Models\Booking;
 use App\Models\Theatre;
 use App\Models\Showtime;
 use Illuminate\Http\Request;
@@ -14,19 +16,26 @@ class BookingController extends Controller
         $movie = Movie::findOrFail($id);
         $theatre = Theatre::findOrFail($theatre_id);
         $showtime = Showtime::findOrFail($showtime_id);
-        $seats = $showtime->seats;
-
-        return view('booking.seat_plan', compact('movie', 'theatre', 'showtime', 'seats'));
+        //dd($showtime);
+        $seats = Seat::select('id')->where('theatre_id', $theatre_id)
+            ->where('showtime_id', $showtime_id)
+            ->where('movie_id', $id)
+            ->get();
+        //dd($seats);
+        $bookings = Booking::select('seat_id', 'movie_id', 'theatre_id', 'showtime_id')->get();
+        //dd($bookings);
+        return view('booking.seat_plan', compact('movie', 'theatre', 'showtime', 'seats', 'bookings'));
     }
 
-    public function checkout(string $id, string $theatre_id, string $showtime_id)
+    public function checkout(Request $request, string $id, string $theatre_id, string $showtime_id)
     {
+        $selectedSeats = $request->input('seat_id', []);
+        $amount = count($selectedSeats) * 10000;
         $movie = Movie::findOrFail($id);
         $theatre = Theatre::findOrFail($theatre_id);
         $showtime = Showtime::findOrFail($showtime_id);
-        return view('booking.movie_checkout', compact('movie', 'theatre', 'showtime'));
+        return view('booking.movie_checkout', compact('movie', 'theatre', 'showtime', 'selectedSeats', 'amount'));
     }
-
     public function ticket_plan(string $id)
     {
         $movie = Movie::findOrFail($id);
@@ -37,14 +46,25 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(string $movie_id, string $theatre_id, string $showtime_id, Request $request)
     {
-        //
+        $seats = $request->input('seats', []);
+
+        foreach ($seats as $seat) {
+            Booking::create([
+                'user_id' => auth()->user()->id,
+                'movie_id' => $movie_id,
+                'theatre_id' => $theatre_id,
+                'showtime_id' => $showtime_id,
+                'seat_id' => $seat
+            ]);
+        }
+
+        return redirect()->route('payment', [
+            $movie_id, $theatre_id, $showtime_id
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //

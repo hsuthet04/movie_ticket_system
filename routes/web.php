@@ -6,6 +6,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\SeatController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,17 +43,27 @@ Route::get('/movie/{id}/movie_detail', [MovieController::class, 'detail']);
 Route::get('/movie/movie_list', [MovieController::class, 'list']);
 
 //seat_plan
-Route::get('/booking/{id}/{theatre_id}/{showtime_id}/seat_plan', [BookingController::class, 'seat_plan']);
-
-//movie checkout
-Route::get('/booking/{id}/{theatre_id}/{showtime_id}/movie_checkout', [BookingController::class, 'checkout']);
+Route::get('/booking/{id}/{theatre_id}/{showtime_id}/seat_plan', [BookingController::class, 'seat_plan'])->name('seat.plan');
 
 //ticket_plan
 Route::get('/booking/{movie_id}/ticket_plan', [BookingController::class, 'ticket_plan']);
 
-// Route::get('/movie/movie_list', [MovieController::class, 'filter']);
+//checkout
+Route::post('/booking/{id}/{theatre_id}/{showtime_id}/movie_checkout', [BookingController::class, 'checkout']);
+Route::post('/booking/{id}/{theatre_id}/{showtime_id}/checkout', [BookingController::class, 'store']);
 
-//admin
+//payment
+Route::post('/booking/{id}/{theatre_id}/{showtime_id}/stripe', [StripeController::class, 'stripe'])->name('stripe');
+Route::get('/booking/{id}/{theatre_id}/{showtime_id}/success', [StripeController::class, 'success'])->name('success');
+Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
+
+Route::get('/booking/{id}/{theatre_id}/{showtime_id}/payment', [StripeController::class, 'payment'])->name('payment');
+//Route::post('/booking/{id}/{theatre_id}/{showtime_id}/update', [StripeController::class, 'update'])->name('update');
+
+Route::get('/movie/movie_list_filter', [MovieController::class, 'filter'])->name('filter');
+
+Route::get('/contact', [PostsController::class, 'contact'])->name('contact');
+//admin 
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'home']);
 
@@ -66,11 +77,21 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 
     Route::put('/movie/{id}/edit', [MovieController::class, 'update']);
 
+    // movie soft delete,force delete
     Route::delete('/movie/{id}/destroy', [MovieController::class, 'destroy']);
+
+    Route::get('/movie/trashmovie', [MovieController::class, 'trash']);
+
+    Route::post('/movie/{id}/trashmovie', [MovieController::class, 'restore'])->name('movie.restore');
+
+    Route::delete('/movie/{id}/trashmovie', [MovieController::class, 'delete'])->name('movie.delete');
+
 
     Route::get('/scheduling/theatre_list', [AdminController::class, 'theatre_list']);
 
     Route::get('/user/user_list', [AdminController::class, 'user_list']);
+
+    Route::get('/booking/booking_list', [AdminController::class, 'booking']);
 
     Route::resource('seat', SeatController::class);
 });

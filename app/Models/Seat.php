@@ -22,4 +22,8 @@ class Seat extends Model
     {
         return $this->belongsTo(Showtime::class);
     }
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 }

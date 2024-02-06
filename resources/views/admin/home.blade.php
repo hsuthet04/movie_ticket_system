@@ -48,7 +48,7 @@
                                         <div class="card-inner">
                                             <h5 class="card-title text-black">Theatres</h5>
                                             <br>
-                                            <p class="tx-12 text-muted">{{$theatres->count()}} target reached</p>
+                                            <p class="tx-12 text-muted">{{ $theatres->count() }} target reached</p>
                                             <div class="card-icon-wrapper">
 
                                             </div>
@@ -59,9 +59,9 @@
                                     class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet">
                                     <div class="mdc-card info-card info-card--info">
                                         <div class="card-inner">
-                                            <h5 class="card-title text-black">Average Income</h5>
+                                            <h5 class="card-title text-black">Total Booking</h5>
                                             <br>
-                                            <p class="tx-12 text-muted">87% target reached</p>
+                                            <p class="tx-12 text-muted">{{ $bookings->count() }} target reached</p>
                                             <div class="card-icon-wrapper">
 
                                             </div>

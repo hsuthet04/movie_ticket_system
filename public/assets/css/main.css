@@ -5015,8 +5015,10 @@ input[type="submit"] {
 /*Movie-Checkout Section Starts Here*/
 .checkout-widget {
   padding: 30px;
-  margin-bottom: 30px;
-  background: #032055;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 140px;
+  
 }
 
 .checkout-widget .title-area, .checkout-widget .sign-in-area {

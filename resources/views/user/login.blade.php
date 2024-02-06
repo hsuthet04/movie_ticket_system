@@ -47,7 +47,7 @@
                             <a href="#0" class="forget-pass">Forget Password</a>
                         </div>
                         <div class="form-group text-center">
-                            <input type="submit" value="log in">
+                            <input type="submit" value="Log in">
                         </div>
                     </form>
                     <div class="option">

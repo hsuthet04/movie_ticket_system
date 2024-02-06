@@ -19,4 +19,8 @@ class Theatre extends Model
     {
         return $this->belongsToMany(Movie::class, 'movie');
     }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

@@ -44,7 +44,7 @@ class MovieController extends Controller
             $request->image->move(public_path('uploads'), $imageName);
         }
         if ($request->hasFile('trailer_image')) {
-            $trailer_imageName = time() . '.' . $request->trailer_image->extension();
+            $trailer_imageName = time() . '_img.' . $request->trailer_image->extension();
             $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
         }
         Movie::create([
@@ -93,6 +93,7 @@ class MovieController extends Controller
         // ]);
 
         $movie = Movie::findOrFail($id);
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $originalName = $image->getClientOriginalName();
@@ -107,7 +108,7 @@ class MovieController extends Controller
             $originalName = $trailer_image->getClientOriginalName();
             $parts = explode('.', $originalName);
             $extension = end($parts);
-            $trailer_imageName = time() . '.' . $extension;
+            $trailer_imageName = time() . '_img.' . $extension;
             $request->trailer_image->move(public_path('uploads'), $trailer_imageName);
             $movie->trailer_image = $trailer_imageName;
         }
@@ -134,6 +135,25 @@ class MovieController extends Controller
         return redirect('/admin/movie/showMovie');
     }
 
+    public function trash()
+    {
+        $records = Movie::onlyTrashed()->get();
+        //Movie::withTrashed()->find($id)->restore(); 
+
+        return view('/admin/movie/trashmovie', compact('records'));
+    }
+
+    public function restore(string $id)
+    {
+        Movie::withTrashed()->findOrFail($id)->restore();
+        return redirect('admin/movie/showMovie');
+    }
+
+    public function delete(string $id)
+    {
+        Movie::withTrashed()->findOrFail($id)->forceDelete();
+        return redirect('admin/movie/showMovie');
+    }
     public function detail(string $id)
     {
         $movies = Movie::findOrFail($id);
@@ -142,20 +162,27 @@ class MovieController extends Controller
     public function list()
     {
         $movies = Movie::all();
-        return view('movie.movie_list', compact('movies'));
+        $languages = Language::all();
+        $genres = Genre::all();
+        return view('movie.movie_list', compact('movies', 'languages', 'genres'));
     }
+
+
     public function filter(Request $request)
     {
-        $genreId = $request->input('genre_id');
-        $languageId = $request->input('language_id');
+        $query = Movie::query();
 
-        $movies = Movie::when($genreId, function ($query) use ($genreId) {
-            $query->where('genre_id', $genreId);
-        })
-            ->when($languageId, function ($query) use ($languageId) {
-                $query->where('language_id', $languageId);
-            })
-            ->get();
-        
+        if ($request->has('language')) {
+            $query->whereIn('language', $request->input('language'));
+        }
+        if ($request->has('genre')) {
+            $query->whereIn('genre', $request->input('genre'));
+        }
+        $movies = $query->get();
+        $languages = Language::all();
+        $genres = Genre::all();
+        //return $movies;
+
+        return view('movie.movie_list', compact('movies', 'languages', 'genres'));
     }
 }
