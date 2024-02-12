@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routess
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -63,6 +64,12 @@ Route::get('/booking/{id}/{theatre_id}/{showtime_id}/payment', [StripeController
 Route::get('/movie/movie_list_filter', [MovieController::class, 'filter'])->name('filter');
 
 Route::get('/contact', [PostsController::class, 'contact'])->name('contact');
+Route::get('/blog', [PostsController::class, 'blog'])->name('blog');
+
+
+//mail send
+Route::get('send-mail', [MailController::class, 'index']);
+
 //admin 
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'home']);

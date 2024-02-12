@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seat;
 use App\Models\Movie;
+use App\Models\Booking;
 use App\Models\Theatre;
 use App\Models\Showtime;
-use App\Models\Seat;
-use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MovieBookingConfirmation;
+
 
 class StripeController extends Controller
 {
@@ -64,8 +67,8 @@ class StripeController extends Controller
                 ->get();
             $bookings = Booking::select('seat_id', 'movie_id', 'theatre_id', 'showtime_id')->get();
             //dd($theatre->id);
-            $payments = Booking::where('theatre_id', $theatre_id)
-                ->where('movie_id', $movie_id)
+            $payments = Booking::with('movie', 'theatre', 'showtime', 'user')->where('movie_id', $movie_id)
+                ->where('theatre_id', $theatre_id)
                 ->where('showtime_id', $showtime_id)
                 ->where('user_id', auth()->user()->id)
                 ->get();
@@ -74,10 +77,10 @@ class StripeController extends Controller
                     'payment' => 1
                 ]);
             }
-
             $stripe = new \Stripe\StripeClient('sk_test_51O9fo4GUohxRIOk7zDTFZ5vou5xxXLyrbXru0mKQ5BSunR2UER2y85RGNlDZZTNvXHsnptfwIapjNLX2s5leNzfB00CYTIht5d');
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
 
+            Mail::to(auth()->user()->email)->send(new MovieBookingConfirmation($payments));
             return view('booking.seat_plan', compact('movie', 'theatre', 'showtime', 'seats', 'bookings'));
         } else {
             return redirect()->route('cancel');
